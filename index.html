@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modal Verbs — C1 Grammar Lab</title>
+<style>
+:root{
+  --navy:#17365d; --blue:#2b6cb0; --light:#eef6ff; --mid:#d8e8f8;
+  --green:#218739; --red:#b42318; --gold:#a66a00; --ink:#1f2937; --white:#fff;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#f4f7fb;color:var(--ink);line-height:1.55}
+header{background:linear-gradient(135deg,#12345b,#2869a8);color:white;padding:30px 18px}
+header .wrap, main{max-width:1100px;margin:auto}
+h1{margin:0 0 6px;font-size:2.25rem} h2{color:var(--navy);margin-top:0}
+.subtitle{opacity:.92;font-size:1.05rem}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:5px 10px;border-radius:999px;font-size:.86rem}
+nav{position:sticky;top:0;z-index:20;background:white;border-bottom:1px solid #dbe3ec;box-shadow:0 2px 8px #00000010}
+.navinner{max-width:1100px;margin:auto;display:flex;overflow:auto}
+nav button{border:0;background:white;padding:13px 14px;cursor:pointer;color:#30465f;font-weight:700;white-space:nowrap}
+nav button:hover,nav button.active{color:var(--blue);background:var(--light)}
+main{padding:24px 14px 60px}
+section{display:none}.section.active{display:block}
+.card{background:white;border:1px solid #dce5ef;border-radius:14px;padding:20px;margin:0 0 18px;box-shadow:0 3px 12px #1b3d5a0d}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px}
+.rule{background:#f8fbff;border-left:4px solid var(--blue);padding:13px 15px;border-radius:7px;margin:10px 0}
+.rule strong{color:var(--navy)}
+.example{margin:9px 0;padding:10px 12px;background:#f8fafc;border-radius:7px}
+.example b{color:#0d5a9e}
+.note{background:#fff8e8;border-left:4px solid #d69e2e;padding:12px 15px;border-radius:7px}
+table{width:100%;border-collapse:collapse;font-size:.94rem}
+th,td{padding:9px;border-bottom:1px solid #e2e8f0;text-align:left;vertical-align:top}
+th{background:#edf5fd;color:var(--navy)}
+.exercise{border:1px solid #dfe7f0;border-radius:12px;padding:17px;margin:14px 0;background:white}
+.exercise h3{margin:0 0 8px;color:var(--navy);font-size:1rem}
+select,input[type=text],textarea{font:inherit;border:1px solid #b9c7d6;border-radius:7px;padding:8px;background:#fff}
+select{min-width:170px}
+textarea{width:100%;min-height:82px;resize:vertical}
+button.action{border:0;background:var(--blue);color:white;border-radius:8px;padding:10px 15px;font-weight:700;cursor:pointer}
+button.action.secondary{background:#52677d}
+button.action:hover{filter:brightness(.94)}
+.feedback{margin-top:10px;padding:10px 12px;border-radius:8px;display:none}
+.correct{background:#eaf8ee;color:#176b2c;border:1px solid #b7e1c0;display:block}
+.incorrect{background:#fff0ef;color:#9b2018;border:1px solid #f0c0bc;display:block}
+.info{background:#eef6ff;color:#184e7a;border:1px solid #c7dff5;display:block}
+.scorebox{position:sticky;top:54px;z-index:10;background:white;border:1px solid #cfe0ef;border-radius:12px;padding:13px 16px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.scorebig{font-size:1.3rem;font-weight:800;color:var(--navy)}
+.progress{height:9px;background:#e7edf4;border-radius:99px;overflow:hidden;flex:1}
+.progress>div{height:100%;background:#2b6cb0;width:0;transition:.3s}
+.small{font-size:.9rem;color:#536477}
+.tag{display:inline-block;background:#e8f1fb;color:#225b91;border-radius:5px;padding:2px 7px;margin:2px;font-size:.82rem}
+footer{text-align:center;color:#66788b;padding:20px}
+@media(max-width:600px){h1{font-size:1.7rem}.card{padding:15px}.scorebox{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>Modal Verbs — C1 Grammar Lab</h1>
+<div class="subtitle">Permission • obligation • necessity • advice • speculation • deduction</div>
+<div class="badges"><span class="badge">1st Bachillerato</span><span class="badge">CEFR C1</span><span class="badge">English only</span><span class="badge">Self-correction & feedback</span></div>
+</div></header>
+
+<nav><div class="navinner">
+<button class="tab active" data-tab="guide">Grammar Guide</button>
+<button class="tab" data-tab="practice">Practice</button>
+<button class="tab" data-tab="open">C1 Challenge</button>
+<button class="tab" data-tab="review">Review & Score</button>
+</div></nav>
+
+<main>
+<section id="guide" class="section active">
+<div class="card">
+<h2>1. Core modal verbs</h2>
+<p>Modal verbs are auxiliary verbs. They are followed by the <strong>base form</strong> of the main verb: <em>She can drive.</em> They do not normally take <em>-s</em>, <em>do/does</em>, or <em>to</em> before the main verb.</p>
+<table>
+<tr><th>Modal / expression</th><th>Main functions</th><th>Example</th></tr>
+<tr><td><span class="tag">can</span></td><td>ability; permission; possibility</td><td>She <b>can</b> solve complex problems.</td></tr>
+<tr><td><span class="tag">could</span></td><td>past/general ability; polite permission/request; possibility</td><td><b>Could</b> I use your notes?</td></tr>
+<tr><td><span class="tag">may</span></td><td>formal permission; possibility</td><td>You <b>may</b> leave once you have finished.</td></tr>
+<tr><td><span class="tag">might</span></td><td>possibility, usually less certain</td><td>We <b>might</b> need more time.</td></tr>
+<tr><td><span class="tag">must</span></td><td>strong obligation; logical deduction</td><td>You <b>must</b> wear a helmet. / She <b>must</b> be exhausted.</td></tr>
+<tr><td><span class="tag">should / ought to</span></td><td>advice; expectation; mild obligation</td><td>You <b>should</b> check the figures.</td></tr>
+<tr><td><span class="tag">had better</span></td><td>strong advice, often with an implied consequence</td><td>You'd <b>better</b> save your work.</td></tr>
+<tr><td><span class="tag">have to</span></td><td>external obligation / necessity</td><td>We <b>have to</b> submit the form today.</td></tr>
+<tr><td><span class="tag">need</span></td><td>necessity; sometimes used as a modal in questions/negatives</td><td>You <b>needn't</b> bring anything.</td></tr>
+<tr><td><span class="tag">be able to</span></td><td>ability, especially where a modal form is unavailable</td><td>She <b>was able to</b> finish on time.</td></tr>
+<tr><td><span class="tag">be allowed to</span></td><td>permission</td><td>Students <b>are allowed to</b> use dictionaries.</td></tr>
+<tr><td><span class="tag">be permitted to</span></td><td>formal permission</td><td>Visitors <b>are permitted to</b> take photographs.</td></tr>
+<tr><td><span class="tag">be supposed to</span></td><td>expected arrangement / duty</td><td>You <b>are supposed to</b> submit it by Friday.</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>2. Permission, obligation and necessity</h2>
+<div class="rule"><strong>can / could / may</strong> can express permission. <em>May</em> is more formal; <em>could</em> is common for polite requests.</div>
+<div class="example">“<b>Can</b> I use your charger?” — “Yes, of course.”</div>
+<div class="example">“<b>Could</b> I leave a little early?” — a polite request.</div>
+<div class="example">“You <b>may</b> begin when you are ready.” — formal permission.</div>
+
+<div class="rule"><strong>must vs have to:</strong> both express obligation. <em>Must</em> often presents the speaker's strong requirement; <em>have to</em> commonly refers to an external rule or circumstance.</div>
+<div class="example">You <b>must</b> back up your files. <span class="small">(speaker's strong instruction)</span></div>
+<div class="example">We <b>have to</b> wear ID badges at school. <span class="small">(institutional requirement)</span></div>
+
+<div class="rule"><strong>mustn't ≠ don't have to.</strong> <em>Mustn't</em> means “it is prohibited”. <em>Don't have to</em> means “it is not necessary”.</div>
+<div class="example">You <b>mustn't</b> disclose the password. = It is forbidden.</div>
+<div class="example">You <b>don't have to</b> print the article. = It is optional.</div>
+
+<div class="rule"><strong>needn't / don't need to:</strong> both mean that something is unnecessary.</div>
+<div class="example">You <b>needn't</b> wait for me.</div>
+<div class="example">You <b>don't need to</b> bring a calculator.</div>
+
+<div class="rule"><strong>needn't have + past participle:</strong> an action happened, but it was unnecessary.</div>
+<div class="example">You <b>needn't have brought</b> any food; there was plenty here.</div>
+<div class="rule"><strong>didn't need to + infinitive:</strong> it was not necessary. Depending on context, the action may or may not have happened.</div>
+<div class="example">We <b>didn't need to book</b> in advance because the restaurant was empty.</div>
+</div>
+
+<div class="card">
+<h2>3. Advice: should, ought to and had better</h2>
+<div class="example">You <b>should</b> revise the key terms before the exam.</div>
+<div class="example">You <b>ought to</b> tell her what happened.</div>
+<div class="example">You'd <b>better</b> leave now, or you'll miss the last train.</div>
+<p><strong>Had better</strong> is stronger and often suggests a warning or an undesirable consequence.</p>
+</div>
+
+<div class="card">
+<h2>4. Ability and permission across tenses</h2>
+<table>
+<tr><th>Meaning</th><th>Useful form</th><th>Example</th></tr>
+<tr><td>present ability</td><td>can / am-is-are able to</td><td>I <b>can</b> analyse the data.</td></tr>
+<tr><td>past general ability</td><td>could / was-were able to</td><td>At ten, she <b>could</b> already read fluently.</td></tr>
+<tr><td>successful ability on one occasion</td><td>was/were able to</td><td>Despite the delay, we <b>were able to</b> catch the train.</td></tr>
+<tr><td>permission now</td><td>can / may / be allowed to</td><td>We <b>are allowed to</b> use the library.</td></tr>
+<tr><td>permission in another tense</td><td>be allowed/permitted to</td><td>They <b>were permitted to</b> enter.</td></tr>
+</table>
+<div class="note"><strong>C1 nuance:</strong> <em>could</em> is natural for general past ability. For a specific successful event, <em>was/were able to</em> often makes the successful outcome explicit.</div>
+</div>
+
+<div class="card">
+<h2>5. Speculation and deduction</h2>
+<p>These forms express different degrees of certainty. Context matters: the same modal can express different meanings in different sentences.</p>
+<table>
+<tr><th>Form</th><th>Typical meaning</th><th>Example</th></tr>
+<tr><td><b>must</b> + infinitive</td><td>strong deduction about the present</td><td>She <b>must be</b> at work; her car is outside.</td></tr>
+<tr><td><b>can't / couldn't</b> + infinitive</td><td>strong negative deduction</td><td>He <b>can't be</b> serious. / They <b>couldn't have</b> known.</td></tr>
+<tr><td><b>may / might / could</b> + infinitive</td><td>possibility</td><td>They <b>might be</b> stuck in traffic.</td></tr>
+<tr><td><b>must have</b> + past participle</td><td>strong deduction about the past</td><td>She <b>must have forgotten</b>.</td></tr>
+<tr><td><b>can't/couldn't have</b> + past participle</td><td>strong negative deduction about the past</td><td>He <b>can't have taken</b> the keys.</td></tr>
+<tr><td><b>may/might/could have</b> + past participle</td><td>past possibility</td><td>They <b>may have missed</b> the announcement.</td></tr>
+<tr><td><b>should/ought to have</b> + past participle</td><td>expected action/result, sometimes with criticism</td><td>She <b>should have arrived</b> by now.</td></tr>
+<tr><td><b>be bound to</b></td><td>very strong expectation</td><td>You're <b>bound to</b> enjoy the exhibition.</td></tr>
+<tr><td><b>be sure to</b></td><td>strong expectation/certainty</td><td>She's <b>sure to</b> notice the difference.</td></tr>
+<tr><td><b>be likely to</b></td><td>probable</td><td>Prices are <b>likely to</b> rise.</td></tr>
+<tr><td><b>be unlikely to</b></td><td>not probable</td><td>He is <b>unlikely to</b> agree.</td></tr>
+<tr><td><b>definitely / probably</b></td><td>adverbs of certainty/probability</td><td>They will <b>probably</b> arrive late.</td></tr>
+</table>
+<div class="rule"><strong>Continuous infinitive:</strong> modal + <em>be + -ing</em> can refer to an action in progress now. <br>He <b>must be working</b> late tonight.</div>
+<div class="rule"><strong>Perfect continuous:</strong> modal + <em>have been + -ing</em> can refer to an activity continuing up to a past or present point. <br>They <b>must have been waiting</b> for hours.</div>
+<div class="rule"><strong>Modal + perfect infinitive</strong> is crucial for past speculation: <em>must have left, might have forgotten, can't have seen</em>.</div>
+</div>
+
+<div class="card">
+<h2>6. Quick contrasts</h2>
+<table>
+<tr><th>Compare</th><th>Meaning</th></tr>
+<tr><td><b>mustn't</b> / <b>don't have to</b></td><td>forbidden / unnecessary</td></tr>
+<tr><td><b>needn't have done</b> / <b>didn't need to do</b></td><td>the action happened unnecessarily / it was unnecessary (whether it happened depends on context)</td></tr>
+<tr><td><b>should</b> / <b>had better</b></td><td>advice / stronger advice with an implied consequence</td></tr>
+<tr><td><b>could</b> / <b>was able to</b></td><td>general past ability / successful ability in a particular situation</td></tr>
+<tr><td><b>must be</b> / <b>might be</b></td><td>strong deduction / possibility</td></tr>
+<tr><td><b>should have done</b> / <b>must have done</b></td><td>expected/ideal past action / strong deduction about a past event</td></tr>
+</table>
+</div>
+</section>
+
+<section id="practice" class="section">
+<div class="scorebox"><div class="scorebig">Practice score: <span id="score1">0</span>/<span id="total1">0</span></div><div class="progress"><div id="bar1"></div></div><button class="action secondary" onclick="resetSection('practice')">Reset</button></div>
+<div class="card"><h2>Part A — Choose the correct option</h2><p class="small">Select the form that best fits the meaning and context. Then click <strong>Check</strong>.</p>
+<div id="mcq"></div>
+</div>
+</section>
+
+<section id="open" class="section">
+<div class="scorebox"><div class="scorebig">C1 Challenge: <span id="score2">0</span>/<span id="total2">0</span></div><div class="progress"><div id="bar2"></div></div><button class="action secondary" onclick="resetSection('open')">Reset</button></div>
+<div class="card"><h2>Part B — Open-ended production</h2>
+<p>Write a complete sentence. The checker accepts a range of grammatically appropriate answers. If your answer is marked incorrect, read the feedback and compare it with the model answer.</p>
+<div id="openq"></div>
+</div>
+<div class="card"><h2>Part C — C1 transformations</h2><p>Rewrite each sentence using the word in brackets. Do not change the meaning.</p><div id="transform"></div></div>
+</section>
+
+<section id="review" class="section">
+<div class="card"><h2>Your results</h2><div id="results">Complete the activities to see your results.</div></div>
+<div class="card"><h2>Self-check: what should you be able to do?</h2>
+<ul>
+<li>Distinguish <strong>mustn't</strong> from <strong>don't have to</strong>.</li>
+<li>Distinguish <strong>needn't have done</strong> from <strong>didn't need to do</strong>.</li>
+<li>Use <strong>must / can't / may / might / could</strong> for deduction and possibility.</li>
+<li>Use perfect modals for past deduction and criticism.</li>
+<li>Choose <strong>should, ought to, had better</strong> according to the strength and context of the advice.</li>
+<li>Use <strong>be able to / be allowed to / be permitted to / be supposed to</strong> when tense or meaning requires them.</li>
+</ul>
+</div>
+</section>
+</main>
+<footer>Modal Verbs — C1 Grammar Lab • Designed for independent practice</footer>
+
+<script>
+const mcqs = [
+["You ______ wear a seat belt in this car; it's a legal requirement.","have to","mustn't","don't have to","might","have to","External/legal requirement."],
+["You ______ use your phone during the examination. It is strictly forbidden.","don't have to","mustn't","needn't","couldn't","mustn't","Prohibition = mustn't."],
+["You ______ bring a calculator; the exam paper provides one.","mustn't","have to","don't have to","ought to","don't have to","The action is unnecessary, not forbidden."],
+["______ I borrow your notes for a few minutes?","Must","Could","Ought","Had better","Could","Could is a polite request."],
+["Visitors ______ take photographs in this room. The museum rules allow it.","are permitted to","mustn't","are supposed to","had better","are permitted to","This is formal permission."],
+["When she was six, she ______ already read novels in English.","could","must","may","had better","could","Could expresses general past ability."],
+["Despite the heavy traffic, we ______ arrive before the doors closed.","could","were able to","must","might","were able to","A specific successful past event is naturally expressed with were able to."],
+["The lights are on and her coat is here. She ______ be at home.","must","can't","might not","couldn't","must","The evidence makes the deduction very strong."],
+["He has been working all night. He ______ be exhausted.","must","can't","may not","couldn't","must","Strong present deduction."],
+["They haven't answered. They ______ be in a meeting.","mustn't","might","have to","are supposed to","might","This is a possibility, not a prohibition."],
+["She wasn't at the meeting. She ______ have forgotten the date.","mustn't","might","might have","should","might have","Past possibility requires the perfect form."],
+["The door was locked from inside. They ______ have left through the window.","can't","should","can't have","needn't have","can't have","Strong negative deduction about the past."],
+["You'd ______ check that figure again; one error could affect the whole report.","better","may","can","be allowed to","better","Had better gives strong advice with an implied consequence."],
+["You ______ tell him about the change; otherwise he may arrive at the wrong time.","should","mustn't","can't","needn't","should","Should gives advice/recommendation."],
+["The train left at 8:00. They ______ have arrived by now.","should","mustn't","can't","needn't","should","Should have + past participle expresses an expected result by now."],
+["We ______ have booked a table. The restaurant was completely empty.","needn't","needn't have","mustn't have","couldn't","needn't have","The booking happened but was unnecessary."],
+["We didn't ______ book a table because the restaurant was empty.","need to","needn't have","must","be permitted to","need to","Didn't need to states that booking was unnecessary; it does not itself say whether it happened."],
+["She is ______ to win the scholarship; her results are outstanding.","unlikely","bound","unable","permitted","bound","Be bound to expresses very strong expectation."],
+["It is ______ that the committee will approve the proposal.","likely","must","allowed","supposed","likely","Likely is an adjective expressing probability."],
+["He is ______ to agree to those terms; they are far too expensive.","unlikely","bound","sure","definitely","unlikely","Unlikely expresses low probability."],
+["You are ______ to find the museum crowded at this time of year.","sure","must","need","unable","sure","Be sure to expresses a strong expectation."],
+["The researchers ______ have been collecting data for months.","must","must have","must have been","can't","must have been","Perfect continuous modal: an activity continuing over a period."],
+["She ______ be working late tonight; her manager asked her to stay.","must","must be","must have","mustn't","must be","Must + be + -ing refers to an action in progress/around now."],
+["You ______ disclose confidential information to anyone outside the team.","don't have to","mustn't","needn't","could","mustn't","Confidentiality is a prohibition."],
+["We ______ submit the application today because the deadline has been extended.","mustn't","don't have to","ought to","can't","don't have to","The deadline extension removes the necessity."],
+["______ you possibly send me the updated file?","Could","Must","May not","Ought","Could","A polite request."],
+["The report is not on her desk. She ______ have taken it home.","may","may have","mustn't","should","may have","Past possibility."],
+["He ______ have known about the problem: nobody told him.","can't","can't have","should","must","can't have","Strong negative deduction about a past state/knowledge."],
+["You ______ be more careful with confidential documents.","ought to","might have","can't","are allowed to","ought to","Ought to expresses advice/mild obligation."],
+["Students ______ use the online dictionary during this part of the test.","are allowed to","mustn't","are supposed to","can't have","are allowed to","Permission."],
+];
+
+const openqs = [
+{p:"Express strong present deduction: the ground is wet and it has just stopped raining.", keys:[/must be/i,/must have been raining/i], model:"It must have been raining."},
+{p:"Express past possibility: Laura wasn't in class, so perhaps she missed the bus.", keys:[/(might|may|could) have missed/i], model:"Laura might have missed the bus."},
+{p:"Express prohibition: students are not permitted to use their phones during the exam.", keys:[/mustn't.*phone/i,/are not permitted to.*phone/i,/aren't permitted to.*phone/i], model:"Students mustn't use their phones during the exam."},
+{p:"Express lack of necessity: it is unnecessary for you to print the article.", keys:[/don't need to print/i,/don't have to print/i,/needn't print/i], model:"You don't need to print the article."},
+{p:"Give strong advice with an implied consequence: leave now or you will miss the last train.", keys:[/(had better|d better) leave/i], model:"You'd better leave now, or you'll miss the last train."},
+{p:"Express successful ability in one particular past situation: despite the delay, we caught the train.", keys:[/(were|was) able to catch/i], model:"Despite the delay, we were able to catch the train."},
+{p:"Express a past unnecessary action: you brought food, but there was plenty here.", keys:[/needn't have brought/i], model:"You needn't have brought any food; there was plenty here."},
+{p:"Express a strong negative deduction about the past: it was impossible that he took the keys because he was abroad.", keys:[/(can't|couldn't) have taken/i], model:"He can't have taken the keys because he was abroad."},
+{p:"Express expectation: the train is expected to arrive at 8:30.", keys:[/(is|is supposed) to arrive/i,/should arrive/i], model:"The train is supposed to arrive at 8:30."},
+{p:"Express a very strong expectation: you will certainly enjoy the exhibition.", keys:[/(are|you're) bound to enjoy/i,/are sure to enjoy/i], model:"You're bound to enjoy the exhibition."}
+];
+
+const transforms = [
+{p:"It is forbidden to enter this room.", word:"MUSTN'T", keys:[/mustn't enter/i,/must not enter/i], model:"You mustn't enter this room."},
+{p:"It isn't necessary for us to arrive early.", word:"HAVE", keys:[/don't have to arrive/i,/do not have to arrive/i], model:"We don't have to arrive early."},
+{p:"Perhaps they have forgotten the address.", word:"MIGHT", keys:[/might have forgotten/i], model:"They might have forgotten the address."},
+{p:"I advise you to check the figures again.", word:"SHOULD", keys:[/should check/i], model:"You should check the figures again."},
+{p:"It was unnecessary for you to buy another ticket, but you did.", word:"NEEDN'T", keys:[/needn't have bought/i,/need not have bought/i], model:"You needn't have bought another ticket."},
+{p:"It is very probable that she will notice the error.", word:"LIKELY", keys:[/is likely to notice/i], model:"She is likely to notice the error."},
+{p:"I am certain that he is at work.", word:"MUST", keys:[/must be at work/i], model:"He must be at work."},
+{p:"Perhaps they are stuck in traffic.", word:"COULD", keys:[/could be stuck/i], model:"They could be stuck in traffic."}
+];
+
+function norm(s){return s.toLowerCase().replace(/[’']/g,"'").replace(/\s+/g," ").trim()}
+function makeMCQ(){
+ let box=document.getElementById("mcq");
+ box.innerHTML=mcqs.map((q,i)=>`<div class="exercise" id="m${i}">
+ <h3>${i+1}. ${q[0]}</h3>
+ <select aria-label="Question ${i+1}"><option value="">— choose —</option>${q.slice(1,5).map(x=>`<option>${x}</option>`).join("")}</select>
+ <button class="action" onclick="checkMCQ(${i})">Check</button><div class="feedback" id="mf${i}"></div></div>`).join("");
+ document.getElementById("total1").textContent=mcqs.length;
+}
+function checkMCQ(i){
+ const el=document.querySelector(`#m${i} select`), fb=document.getElementById("mf"+i);
+ if(!el.value){fb.className="feedback info";fb.textContent="Choose an option first.";return}
+ if(el.value===mcqs[i][5]){fb.className="feedback correct";fb.textContent="✓ Correct. "+mcqs[i][6];el.dataset.done="1";el.dataset.correct="1"}
+ else{fb.className="feedback incorrect";fb.textContent="✗ Not quite. "+mcqs[i][6]+" The correct answer is “"+mcqs[i][5]+"”.";el.dataset.done="1";el.dataset.correct="0"}
+ updateScores();
+}
+function checkOpen(i){
+ const input=document.getElementById("o"+i), fb=document.getElementById("of"+i), val=norm(input.value);
+ if(!val){fb.className="feedback info";fb.textContent="Write a sentence first.";return}
+ const ok=openqs[i].keys.some(r=>r.test(input.value));
+ if(ok){fb.className="feedback correct";fb.textContent="✓ Good. Your answer matches the target meaning. Model answer: "+openqs[i].model;input.dataset.correct="1"}
+ else{fb.className="feedback incorrect";fb.textContent="✗ Check the modal meaning/form. Model answer: "+openqs[i].model;input.dataset.correct="0"}
+ input.dataset.done="1"; updateScores();
+}
+function checkTransform(i){
+ const input=document.getElementById("t"+i), fb=document.getElementById("tf"+i);
+ if(!input.value.trim()){fb.className="feedback info";fb.textContent="Write your transformation first.";return}
+ const ok=transforms[i].keys.some(r=>r.test(input.value));
+ if(ok){fb.className="feedback correct";fb.textContent="✓ Correct transformation. Model answer: "+transforms[i].model;input.dataset.correct="1"}
+ else{fb.className="feedback incorrect";fb.textContent="✗ Check the required structure. Model answer: "+transforms[i].model;input.dataset.correct="0"}
+ input.dataset.done="1"; updateScores();
+}
+function makeOpen(){
+ document.getElementById("openq").innerHTML=openqs.map((q,i)=>`<div class="exercise"><h3>${i+1}. ${q.p}</h3><textarea id="o${i}" placeholder="Write your sentence here..."></textarea><button class="action" onclick="checkOpen(${i})">Check answer</button><div class="feedback" id="of${i}"></div></div>`).join("");
+ document.getElementById("transform").innerHTML=transforms.map((q,i)=>`<div class="exercise"><h3>${i+1}. ${q.p} <span class="tag">${q.word}</span></h3><input type="text" id="t${i}" style="width:100%" placeholder="Rewrite the sentence..."><br><button class="action" onclick="checkTransform(${i})" style="margin-top:9px">Check answer</button><div class="feedback" id="tf${i}"></div></div>`).join("");
+ document.getElementById("total2").textContent=openqs.length+transforms.length;
+}
+function updateScores(){
+ let m=[...document.querySelectorAll("#mcq select")], mc=m.filter(x=>x.dataset.done).length, mcor=m.filter(x=>x.dataset.correct==="1").length;
+ document.getElementById("score1").textContent=mcor; document.getElementById("bar1").style.width=(mcqs.length?mcor/mcqs.length*100:0)+"%";
+ let all=[...document.querySelectorAll("#openq textarea"),...document.querySelectorAll("#transform input")];
+ let done=all.filter(x=>x.dataset.done).length, cor=all.filter(x=>x.dataset.correct==="1").length;
+ document.getElementById("score2").textContent=cor; document.getElementById("bar2").style.width=(all.length?cor/all.length*100:0)+"%";
+ const total=mcqs.length+all.length, score=mcor+cor;
+ document.getElementById("results").innerHTML=`<p><strong>Current score:</strong> ${score}/${total} answered items scored as correct (${total?Math.round(score/total*100):0}%).</p>
+ <p><strong>Multiple choice:</strong> ${mcor}/${mcqs.length}. <strong>Open/C1:</strong> ${cor}/${all.length}.</p>
+ <p class="small">Open-ended items are checked against acceptable target structures. In real writing, a teacher should also judge spelling, punctuation, register and whether the sentence is fully appropriate to the context.</p>`;
+}
+function resetSection(sec){
+ if(sec==="practice"){document.querySelectorAll("#mcq select").forEach(x=>{x.value="";delete x.dataset.done;delete x.dataset.correct});document.querySelectorAll("#mcq .feedback").forEach(x=>x.className="feedback")}
+ else{document.querySelectorAll("#openq textarea,#transform input").forEach(x=>{x.value="";delete x.dataset.done;delete x.dataset.correct});document.querySelectorAll("#openq .feedback,#transform .feedback").forEach(x=>x.className="feedback")}
+ updateScores();
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");
+ document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));
+ document.getElementById(b.dataset.tab).classList.add("active");
+ window.scrollTo({top:0,behavior:"smooth"});
+}));
+makeMCQ(); makeOpen(); updateScores();
+</script>
+</body>
+</html>
