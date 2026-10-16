@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vague Language: Imprecision</title>
+<style>
+  :root {
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --text: #1f2937;
+    --muted: #64748b;
+    --accent: #3157d5;
+    --accent-dark: #2444ae;
+    --border: #dbe2ea;
+    --correct: #16794a;
+    --correct-bg: #eaf7f0;
+    --wrong: #b42318;
+    --wrong-bg: #fff0ee;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .container {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 28px 18px 60px;
+  }
+  header {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 16px rgba(20, 35, 60, .06);
+  }
+  h1 { margin: 0 0 8px; font-size: clamp(1.7rem, 4vw, 2.5rem); }
+  h2 { margin-top: 0; font-size: 1.35rem; }
+  .subtitle { margin: 0; color: var(--muted); }
+  .activity {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px;
+    margin: 22px 0;
+    box-shadow: 0 4px 16px rgba(20, 35, 60, .05);
+  }
+  .instructions {
+    color: var(--muted);
+    margin-top: -4px;
+  }
+  .question {
+    padding: 16px 0;
+    border-top: 1px solid #edf1f5;
+  }
+  .question:first-of-type { border-top: 0; }
+  .question-number {
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .options {
+    display: grid;
+    gap: 7px;
+    margin-left: 4px;
+  }
+  label.option {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 9px;
+  }
+  label.option:hover { background: #f5f7ff; }
+  select, input[type="text"] {
+    font: inherit;
+    border: 1px solid #bfc9d6;
+    border-radius: 8px;
+    padding: 7px 9px;
+    background: white;
+    color: var(--text);
+  }
+  select { min-width: 220px; }
+  input[type="text"] { width: min(100%, 520px); }
+  .answer-row {
+    margin-top: 8px;
+  }
+  .expression-box {
+    background: #f7f9fc;
+    border: 1px dashed #b9c4d2;
+    border-radius: 10px;
+    padding: 13px 15px;
+    margin: 14px 0 18px;
+    font-weight: 600;
+  }
+  .expression-box span { display: inline-block; margin: 3px 8px 3px 0; }
+  .buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  button {
+    border: 0;
+    border-radius: 9px;
+    padding: 10px 16px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .check {
+    background: var(--accent);
+    color: white;
+  }
+  .check:hover { background: var(--accent-dark); }
+  .reset {
+    background: #e8edf3;
+    color: #253247;
+  }
+  .result {
+    margin-top: 14px;
+    padding: 10px 13px;
+    border-radius: 9px;
+    font-weight: 700;
+    display: none;
+  }
+  .result.show { display: block; }
+  .result.good { background: var(--correct-bg); color: var(--correct); }
+  .result.bad { background: var(--wrong-bg); color: var(--wrong); }
+  .correct-answer {
+    display: none;
+    margin-top: 6px;
+    font-size: .92rem;
+    color: var(--wrong);
+  }
+  .wrong .correct-answer { display: block; }
+  .correct { outline: 2px solid rgba(22,121,74,.35); background: var(--correct-bg); }
+  .wrong { outline: 2px solid rgba(180,35,24,.25); background: var(--wrong-bg); border-radius: 9px; }
+  .rephrase {
+    background: #fbfcfe;
+    border: 1px solid #e8edf3;
+    border-radius: 10px;
+    padding: 13px;
+  }
+  .prompt {
+    margin-bottom: 8px;
+  }
+  .arrow { font-weight: 700; color: var(--accent); }
+  .challenge {
+    margin-top: 18px;
+    padding: 13px 15px;
+    border-left: 4px solid var(--accent);
+    background: #f4f7ff;
+    border-radius: 8px;
+  }
+  footer {
+    color: var(--muted);
+    font-size: .9rem;
+    text-align: center;
+    margin-top: 30px;
+  }
+  @media (max-width: 650px) {
+    .container { padding: 14px 10px 40px; }
+    header, .activity { padding: 19px; }
+    select { width: 100%; min-width: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Vague Language: Imprecision</h1>
+  <p class="subtitle">C1 English — Interactive practice</p>
+</header>
+
+<section class="activity" id="activity1">
+  <h2>Activity 1 – Choose the correct option</h2>
+  <p class="instructions">Choose the expression that best completes each sentence.</p>
+
+  <div class="question" data-answer="b">
+    <div class="question-number">1. The new sports centre will cost __________ €8 million to build.</div>
+    <div class="options">
+      <label class="option"><input type="radio" name="a1q1" value="a"> a) sixish</label>
+      <label class="option"><input type="radio" name="a1q1" value="b"> b) in the region of</label>
+      <label class="option"><input type="radio" name="a1q1" value="c"> c) at most</label>
+      <label class="option"><input type="radio" name="a1q1" value="d"> d) thirty-something</label>
+    </div>
+  </div>
+
+  <div class="question" data-answer="a">
+    <div class="question-number">2. There were __________ 200 people at the conference, but the organisers have not confirmed the exact number.</div>
+    <div class="options">
+      <label class="option"><input type="radio" name="a1q2" value="a"> a) roughly</label>
+      <label class="option"><input type="radio" name="a1q2" value="b"> b) no more</label>
+      <label class="option"><input type="radio" name="a1q2" value="c"> c) at most</label>
+      <label class="option"><input type="radio" name="a1q2" value="d"> d) just under</label>
+    </div>
+  </div>
+
+  <div class="question" data-answer="b">
+    <div class="question-number">3. The journey should take three hours, __________.</div>
+    <div class="options">
+      <label class="option"><input type="radio" name="a1q3" value="a"> a) in excess of</label>
+      <label class="option"><input type="radio" name="a1q3" value="b"> b) give or take</label>
+      <label class="option"><input type="radio" name="a1q3" value="c"> c) at least</label>
+      <label class="option"><input type="radio" name="a1q3" value="d"> d) somewhere around</label>
+    </div>
+  </div>
+
+  <div class="question" data-answer="a">
+    <div class="question-number">4. The company employs __________ 1,500 people across its international offices.</div>
+    <div class="options">
+      <label class="option"><input type="radio" name="a1q4" value="a"> a) on the order of</label>
+      <label class="option"><input type="radio" name="a1q4" value="b"> b) sixish</label>
+      <label class="option"><input type="radio" name="a1q4" value="c"> c) no more than</label>
+      <label class="option"><input type="radio" name="a1q4" value="d"> d) to some extent</label>
+    </div>
+  </div>
+
+  <div class="question" data-answer="a">
+    <div class="question-number">5. The repairs will cost __________ €2,000, so we need to make sure we have enough money.</div>
+    <div class="options">
+      <label class="option"><input type="radio" name="a1q5" value="a"> a) at least</label>
+      <label class="option"><input type="radio" name="a1q5" value="b"> b) at most</label>
+      <label class="option"><input type="radio" name="a1q5" value="c"> c) just under</label>
+      <label class="option"><input type="radio" name="a1q5" value="d"> d) broadly speaking</label>
+    </div>
+  </div>
+
+  <div class="question" data-answer="a">
+    <div class="question-number">6. The meeting lasted an hour __________ before everyone finally reached an agreement.</div>
+    <div class="options">
+      <label class="option"><input type="radio" name="a1q6" value="a"> a) or so</label>
+      <label class="option"><input type="radio" name="a1q6" value="b"> b) in excess of</label>
+      <label class="option"><input type="radio" name="a1q6" value="c"> c) -odd</label>
+      <label class="option"><input type="radio" name="a1q6" value="d"> d) in the low</label>
+    </div>
+  </div>
+
+  <div class="question" data-answer="b">
+    <div class="question-number">7. The apartment can accommodate __________ six people.</div>
+    <div class="options">
+      <label class="option"><input type="radio" name="a1q7" value="a"> a) in the region of</label>
+      <label class="option"><input type="radio" name="a1q7" value="b"> b) no more than</label>
+      <label class="option"><input type="radio" name="a1q7" value="c"> c) roughly</label>
+      <label class="option"><input type="radio" name="a1q7" value="d"> d) somewhere around</label>
+    </div>
+  </div>
+
+  <div class="question" data-answer="a">
+    <div class="question-number">8. The university has received __________ 10,000 applications this year.</div>
+    <div class="options">
+      <label class="option"><input type="radio" name="a1q8" value="a"> a) in excess of</label>
+      <label class="option"><input type="radio" name="a1q8" value="b"> b) at most</label>
+      <label class="option"><input type="radio" name="a1q8" value="c"> c) sixish</label>
+      <label class="option"><input type="radio" name="a1q8" value="d"> d) thereabouts</label>
+    </div>
+  </div>
+
+  <div class="question" data-answer="a">
+    <div class="question-number">9. The figures are __________ the same as those recorded last year.</div>
+    <div class="options">
+      <label class="option"><input type="radio" name="a1q9" value="a"> a) more or less</label>
+      <label class="option"><input type="radio" name="a1q9" value="b"> b) at least</label>
+      <label class="option"><input type="radio" name="a1q9" value="c"> c) in the high</label>
+      <label class="option"><input type="radio" name="a1q9" value="d"> d) no more</label>
+    </div>
+  </div>
+
+  <div class="question" data-answer="a">
+    <div class="question-number">10. The temperature should remain at around 20°C, __________.</div>
+    <div class="options">
+      <label class="option"><input type="radio" name="a1q10" value="a"> a) or thereabouts</label>
+      <label class="option"><input type="radio" name="a1q10" value="b"> b) in excess of</label>
+      <label class="option"><input type="radio" name="a1q10" value="c"> c) thirty-something</label>
+      <label class="option"><input type="radio" name="a1q10" value="d"> d) at most</label>
+    </div>
+  </div>
+
+  <div class="buttons"><button class="check" onclick="checkActivity('activity1')">Check your answers</button><button class="reset" onclick="resetActivity('activity1')">Reset</button></div>
+  <div class="result" id="activity1-result"></div>
+</section>
+
+<section class="activity" id="activity2">
+  <h2>Activity 2 – Complete the sentences</h2>
+  <p class="instructions">Use each expression only once.</p>
+  <div class="expression-box">
+    <span>roughly</span> · <span>somewhere around</span> · <span>just over</span> · <span>just under</span> · <span>at least</span> · <span>at most</span> · <span>ballpark figure</span> · <span>in the mid</span> · <span>broadly speaking</span> · <span>to some extent</span>
+  </div>
+
+  <div class="question" data-answer="roughly"><div class="question-number">1. The population of the town is <input type="text" data-answer-input> 75,000, although the latest census has not yet been published.</div></div>
+  <div class="question" data-answer="ballpark figure"><div class="question-number">2. We don't know the exact cost yet. Could you give me a <input type="text" data-answer-input>?</div></div>
+  <div class="question" data-answer="somewhere around"><div class="question-number">3. The journey will take <input type="text" data-answer-input> four hours, depending on traffic.</div></div>
+  <div class="question" data-answer="just under"><div class="question-number">4. The company employs <input type="text" data-answer-input> 300 people, so it is relatively small compared with its competitors.</div></div>
+  <div class="question" data-answer="at least"><div class="question-number">5. You will need <input type="text" data-answer-input> two references before your application can be considered.</div></div>
+  <div class="question" data-answer="just over"><div class="question-number">6. The museum receives <input type="text" data-answer-input> 100,000 visitors every year.</div></div>
+  <div class="question" data-answer="broadly speaking"><div class="question-number">7. <input type="text" data-answer-input>, the results support the original hypothesis.</div></div>
+  <div class="question" data-answer="to some extent"><div class="question-number">8. The project was successful <input type="text" data-answer-input>, although several problems remained unresolved.</div></div>
+  <div class="question" data-answer="in the mid"><div class="question-number">9. She is <input type="text" data-answer-input> thirties and has already published several academic papers.</div></div>
+  <div class="question" data-answer="in the region of"><div class="question-number">10. The population has risen to <input type="text" data-answer-input> 500,000.</div></div>
+
+  <div class="buttons"><button class="check" onclick="checkActivity('activity2')">Check your answers</button><button class="reset" onclick="resetActivity('activity2')">Reset</button></div>
+  <div class="result" id="activity2-result"></div>
+</section>
+
+<section class="activity" id="activity3">
+  <h2>Activity 3 – Complete with the correct vague expression</h2>
+  <p class="instructions">Complete each sentence with a suitable expression. Pay close attention to the meaning and grammatical position.</p>
+
+  <div class="question" data-answer="give or take"><div class="question-number">1. The repairs are expected to cost €10,000, <input type="text" data-answer-input>.</div></div>
+  <div class="question" data-answer="-odd"><div class="question-number">2. There were twenty <input type="text" data-answer-input> students waiting outside the examination room.</div></div>
+  <div class="question" data-answer="-something"><div class="question-number">3. He's thirty-<input type="text" data-answer-input> and has been working in the technology sector for several years.</div></div>
+  <div class="question" data-answer="-ish"><div class="question-number">4. Let's meet at six<input type="text" data-answer-input>. I don't think we need to agree on an exact time.</div></div>
+  <div class="question" data-answer="on the order of"><div class="question-number">5. The project took <input type="text" data-answer-input> several weeks longer than originally planned.</div></div>
+  <div class="question" data-answer="in excess of"><div class="question-number">6. The company made <input type="text" data-answer-input> €1 million in profits last year.</div></div>
+  <div class="question" data-answer="at most"><div class="question-number">7. The new stadium can hold <input type="text" data-answer-input> 50,000 spectators, but definitely not more.</div></div>
+  <div class="question" data-answer="just over"><div class="question-number">8. The population is <input type="text" data-answer-input> 500,000, so the town is considerably larger than it was ten years ago.</div></div>
+  <div class="question" data-answer="more or less"><div class="question-number">9. The two sets of figures are <input type="text" data-answer-input> the same, despite some minor differences.</div></div>
+  <div class="question" data-answer="to some extent"><div class="question-number">10. The policy appears to have worked <input type="text" data-answer-input>, but it has not solved the problem completely.</div></div>
+
+  <div class="buttons"><button class="check" onclick="checkActivity('activity3')">Check your answers</button><button class="reset" onclick="resetActivity('activity3')">Reset</button></div>
+  <div class="result" id="activity3-result"></div>
+</section>
+
+<section class="activity" id="activity4">
+  <h2>Activity 4 – Rephrasing</h2>
+  <p class="instructions">Rewrite each sentence using the word/expression in brackets. Do not change meaning.</p>
+
+  <div class="question" data-answer="The project will cost somewhere around €50,000.">
+    <div class="rephrase"><div class="prompt">1. The project will cost approximately €50,000. <strong>(SOMEWHERE)</strong></div><span class="arrow">→</span> <input type="text" data-answer-input></div>
+  </div>
+  <div class="question" data-answer="The company employs in excess of 2,000 people.">
+    <div class="rephrase"><div class="prompt">2. The company employs slightly more than 2,000 people. <strong>(EXCESS)</strong></div><span class="arrow">→</span> <input type="text" data-answer-input></div>
+  </div>
+  <div class="question" data-answer="The journey takes two hours or so.">
+    <div class="rephrase"><div class="prompt">3. The journey takes approximately two hours. <strong>(OR)</strong></div><span class="arrow">→</span> <input type="text" data-answer-input></div>
+  </div>
+  <div class="question" data-answer="There were twenty-odd people at the meeting.">
+    <div class="rephrase"><div class="prompt">4. There were slightly more than twenty people at the meeting. <strong>(ODD)</strong></div><span class="arrow">→</span> <input type="text" data-answer-input></div>
+  </div>
+  <div class="question" data-answer="The temperature will be around 20 degrees, or thereabouts.">
+    <div class="rephrase"><div class="prompt">5. The temperature will probably be around 20 degrees. <strong>(THEREABOUTS)</strong></div><span class="arrow">→</span> <input type="text" data-answer-input></div>
+  </div>
+  <div class="question" data-answer="The room can hold thirty people at most.">
+    <div class="rephrase"><div class="prompt">6. The room can accommodate a maximum of thirty people. <strong>(MOST)</strong></div><span class="arrow">→</span> <input type="text" data-answer-input></div>
+  </div>
+  <div class="question" data-answer="The repairs will cost at least €5,000.">
+    <div class="rephrase"><div class="prompt">7. The repairs will cost a minimum of €5,000. <strong>(LEAST)</strong></div><span class="arrow">→</span> <input type="text" data-answer-input></div>
+  </div>
+  <div class="question" data-answer="The results are more or less the same as last year's results.">
+    <div class="rephrase"><div class="prompt">8. The results are approximately the same as last year's results. <strong>(LESS)</strong></div><span class="arrow">→</span> <input type="text" data-answer-input></div>
+  </div>
+  <div class="question" data-answer="The statement is true to some extent, but it is not completely accurate.">
+    <div class="rephrase"><div class="prompt">9. The statement is partly true, but it is not completely accurate. <strong>(EXTENT)</strong></div><span class="arrow">→</span> <input type="text" data-answer-input></div>
+  </div>
+  <div class="question" data-answer="Broadly speaking, the results confirm what we expected.">
+    <div class="rephrase"><div class="prompt">10. In general, the results confirm what we expected. <strong>(SPEAKING)</strong></div><span class="arrow">→</span> <input type="text" data-answer-input></div>
+  </div>
+
+  <div class="challenge"><strong>Challenge:</strong> For each sentence, preserve both meaning and degree of imprecision.</div>
+  <div class="buttons"><button class="check" onclick="checkActivity('activity4')">Check your answers</button><button class="reset" onclick="resetActivity('activity4')">Reset</button></div>
+  <div class="result" id="activity4-result"></div>
+</section>
+
+<footer>Vague Language: Imprecision · C1 English</footer>
+</div>
+
+<script>
+function normalise(text) {
+  return text
+    .toLowerCase()
+    .replace(/[’']/g, "'")
+    .replace(/[–—]/g, "-")
+    .replace(/\s+/g, " ")
+    .replace(/\s+([,.!?])/g, "$1")
+    .trim();
+}
+
+function checkActivity(id) {
+  const activity = document.getElementById(id);
+  const questions = activity.querySelectorAll(".question");
+  let correct = 0;
+
+  questions.forEach(q => {
+    q.classList.remove("correct", "wrong");
+    const input = q.querySelector("[data-answer-input]");
+    let userAnswer = "";
+
+    if (input) {
+      userAnswer = input.value;
+    } else {
+      const selected = q.querySelector('input[type="radio"]:checked');
+      userAnswer = selected ? selected.value : "";
+    }
+
+    const expected = q.dataset.answer;
+    let isCorrect = false;
+
+    if (id === "activity1") {
+      isCorrect = userAnswer === expected;
+    } else {
+      isCorrect = normalise(userAnswer) === normalise(expected);
+    }
+
+    if (isCorrect) {
+      correct++;
+      q.classList.add("correct");
+    } else {
+      q.classList.add("wrong");
+    }
+  });
+
+  const result = document.getElementById(id + "-result");
+  const total = questions.length;
+  result.textContent = `Score: ${correct}/${total}`;
+  result.className = "result show " + (correct === total ? "good" : "bad");
+}
+
+function resetActivity(id) {
+  const activity = document.getElementById(id);
+  activity.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+  activity.querySelectorAll('input[type="text"]').forEach(i => i.value = "");
+  activity.querySelectorAll(".question").forEach(q => q.classList.remove("correct", "wrong"));
+  const result = document.getElementById(id + "-result");
+  result.textContent = "";
+  result.className = "result";
+}
+</script>
+</body>
+</html>
